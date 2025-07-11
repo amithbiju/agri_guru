@@ -925,6 +925,26 @@ const AgricultureAIAssistantComponent: React.FC<{ currentUserId: string }> = ({
                 break;
               }
 
+              case "connect_to_agri_expert": {
+                const args = fCall.args as any;
+
+                const expertRequest = {
+                  id: `expert_request_${Date.now()}`,
+                  question: args.question,
+                  expertise_needed: args.expertise_needed || "general",
+                  farmer_id: currentUserId,
+                  status: "pending", // You can update this later when an expert is assigned
+                  created_at: new Date(),
+                };
+
+                await addDoc(collection(db, "expert_requests"), expertRequest);
+
+                functionResponse.response.result = {
+                  string_value: `Your request has been sent to an agricultural expert. You will be contacted shortly for help with "${args.question}".`,
+                };
+                break;
+              }
+
               case "get_reminders": {
                 const args = fCall.args as any;
                 const days = args.days_ahead || 7;
