@@ -1,0 +1,111 @@
+.form-container {
+  display: flex;
+  height: 100vh;
+  background-color: #121212;
+  color: #ffffff;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+  .user-form {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #1e1e1e;
+
+    h2 {
+      margin-bottom: 1rem;
+      color: #90caf9;
+    }
+
+    input {
+      background: #2c2c2c;
+      border: none;
+      border-radius: 5px;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .interest-input-group {
+      display: flex;
+      align-items: center;
+
+      input {
+        flex: 1;
+        margin-right: 0.5rem;
+      }
+
+      .add-btn-inline {
+        background-color: #424242;
+        color: #90caf9;
+        border: none;
+        padding: 0.6rem 1rem;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 1.2rem;
+
+        &:hover {
+          background-color: #616161;
+        }
+      }
+    }
+
+    .interest-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+
+      .interest-tag {
+        background: #2c2c2c;
+        padding: 0.5rem 0.8rem;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+
+        input {
+          background: transparent;
+          border: none;
+          color: white;
+          outline: none;
+          max-width: 100px;
+        }
+
+        span {
+          margin-left: 0.5rem;
+          cursor: pointer;
+          color: #f44336;
+          font-weight: bold;
+        }
+      }
+    }
+
+    button[type="submit"] {
+      background-color: #90caf9;
+      color: #121212;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #64b5f6;
+      }
+    }
+  }
+
+  .image-section {
+    flex: 1;
+    background-color: #121212;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+    }
+  }
+}
