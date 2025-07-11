@@ -15,10 +15,6 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { useLiveAPIContext } from "../../contexts/LiveAPIContext";
-// import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-// import { Button } from '@/components/ui/button';
-// import { Input } from '@/components/ui/input';
-// import { MessageSquare, Users } from 'lucide-react';
 
 // Types
 interface Message {
@@ -195,24 +191,6 @@ Before giving farming advice or alerts, check for user’s location, crop detail
     },
   ],
 };
-
-// Chips arrays remain the same
-const INITIAL_SCREEN_CHIPS = [
-  { label: "👋 Say Hello", message: "I'd like to say hello to someone new" },
-  {
-    label: "🎨 Find Hobby Friends",
-    message: "Find people who share my interests",
-  },
-  { label: "💭 Start Chat", message: "I want to start a conversation" },
-  { label: "🤝 Meet Others", message: "Help me meet other people" },
-];
-
-const CHAT_SCREEN_CHIPS = [
-  { label: "📢 Read Message", message: "Please read this message aloud" },
-  { label: "💡 Suggestion", message: "Help me write a friendly response" },
-  { label: "😊 Add Emojis", message: "Make my message more engaging" },
-  { label: "🔍 Find Similar", message: "Find people with similar interests" },
-];
 
 const ElderlyAIAssistantComponent: React.FC<{ currentUserId: string }> = ({
   currentUserId,
@@ -432,71 +410,7 @@ const ElderlyAIAssistantComponent: React.FC<{ currentUserId: string }> = ({
 
   // Rest of the component remains the same...
 
-  return (
-    <div className="flex h-screen p-4">
-      {/* <Card className="w-full max-w-4xl mx-auto">
-        <CardHeader>
-          <CardTitle className="text-2xl flex items-center gap-2">
-            <MessageSquare className="h-6 w-6" />
-            Friendly Chat Assistant
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            <div className="h-[400px] overflow-y-auto border rounded-lg p-4">
-              {messages.map((message) => (
-                <div
-                  key={message.id}
-                  className={`mb-4 ${
-                    message.isAIMessage ? 'text-blue-600' : ''
-                  }`}
-                >
-                  {message.content}
-                </div>
-              ))}
-            </div>
-            
-            <div className="flex gap-2">
-              <Input
-                value={messageInput}
-                onChange={(e) => setMessageInput(e.target.value)}
-                placeholder="Type your message..."
-                className="text-lg"
-                disabled={isProcessing}
-              />
-              <Button 
-                onClick={() => sendMessage(messageInput)}
-                disabled={isProcessing || !messageInput.trim()}
-                className="text-lg px-6"
-              >
-                Send
-              </Button>
-            </div>
-
-            <div className="mt-4">
-              <div className="text-lg font-medium mb-2">Quick Actions:</div>
-              <div className="flex flex-wrap gap-2">
-                {(messages.length === 0 ? INITIAL_SCREEN_CHIPS : CHAT_SCREEN_CHIPS).map((chip) => (
-                  <Button
-                    key={chip.label}
-                    variant="outline"
-                    onClick={() => {
-                      if (!isProcessing) {
-                        sendMessage(chip.message);
-                      }
-                    }}
-                    className="text-lg"
-                  >
-                    {chip.label}
-                  </Button>
-                ))}
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card> */}
-    </div>
-  );
+  return <div className="flex h-screen p-4"></div>;
 };
 
 export const ElderlyAIAssistant = memo(ElderlyAIAssistantComponent);

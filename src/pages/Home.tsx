@@ -7,6 +7,7 @@ import cn from "classnames";
 import { ElderlyAIAssistant } from "../components/elderlyassistant/ElderlyAssistant";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase/Config"; // your firebase config
+import { AgricultureAIAssistant } from "../components/agricultureassistant/AgricultureAIAssistant";
 
 const API_KEY = process.env.REACT_APP_GEMINI_API_KEY as string;
 if (typeof API_KEY !== "string") {
@@ -44,7 +45,8 @@ const Home = () => {
         <SidePanel />
         <main>
           <div className="main-app-area">
-            <ElderlyAIAssistant currentUserId={userUID || ""} />
+            {/* <ElderlyAIAssistant  /> */}
+            <AgricultureAIAssistant currentUserId={userUID || ""} />
 
             <video
               className={cn("stream", {

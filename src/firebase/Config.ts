@@ -5,18 +5,18 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyA6GmGV4zi6YRZveSQyS3bLrQi1c0XGYwU",
-  authDomain: "kooya-935f3.firebaseapp.com",
-  projectId: "kooya-935f3",
-  storageBucket: "kooya-935f3.firebasestorage.app",
-  messagingSenderId: "1073154997391",
-  appId: "1:1073154997391:web:3f5a739dd7e203f7a384fa",
-  measurementId: "G-BHP4V7N97S",
+  apiKey: "AIzaSyBZTOvnRnfFsg2sqbYwfRQ7sWBbU7riAb8",
+  authDomain: "agriguru-e6a0d.firebaseapp.com",
+  projectId: "agriguru-e6a0d",
+  storageBucket: "agriguru-e6a0d.firebasestorage.app",
+  messagingSenderId: "118425962463",
+  appId: "1:118425962463:web:49101b5da5921ba492e66a",
+  measurementId: "G-KYXPDNS28X",
 };
+
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
