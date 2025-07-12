@@ -21,6 +21,8 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import { useLiveAPIContext } from "../../contexts/LiveAPIContext";
+import axios from "axios";
+import { PhoneCallingUI } from "./PhoneCallingUIComponent";
 
 // Additional utility functions for external API integrations
 const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
@@ -534,11 +536,9 @@ const toolObject: Tool[] = [
         parameters: {
           type: SchemaType.OBJECT,
           properties: {
-            crop_name: { type: SchemaType.STRING },
-            growth_stage: { type: SchemaType.STRING },
             location: { type: SchemaType.STRING },
           },
-          required: ["crop_name", "growth_stage", "location"],
+          required: ["location"],
         },
       },
       {
@@ -983,14 +983,36 @@ const AgricultureAIAssistantComponent: React.FC<{ currentUserId: string }> = ({
 
               case "crop_advice": {
                 const args = fCall.args as any;
-                const adviceData = await mockCropAdviceAPI(
-                  args.crop_name,
-                  args.growth_stage,
-                  args.location
-                );
-                functionResponse.response.result = {
-                  object_value: adviceData,
-                };
+
+                try {
+                  const response = await axios.post(
+                    "http://127.0.0.1:5000/recommend",
+                    {
+                      location: args.location,
+                    }
+                  );
+
+                  const apiData = response.data;
+
+                  // You can optionally add crop_name and growth_stage to the response for context
+                  const adviceData = {
+                    recommendation: apiData.crop_recommendations,
+                    environment: apiData.environment,
+                    location: apiData.location,
+                    market_prices: apiData.market_prices,
+                    soil: apiData.soil,
+                  };
+
+                  functionResponse.response.result = {
+                    object_value: adviceData,
+                  };
+                } catch (error) {
+                  console.error("Error fetching crop recommendation:", error);
+                  functionResponse.response.result = {
+                    string_value:
+                      "Failed to fetch crop recommendations. Please try again.",
+                  };
+                }
                 break;
               }
 
@@ -1325,30 +1347,7 @@ const AgricultureAIAssistantComponent: React.FC<{ currentUserId: string }> = ({
 
   return (
     <div className="flex h-screen p-4 bg-green-50">
-      <div className="w-full max-w-4xl mx-auto">
-        <div className="bg-white rounded-lg shadow-lg p-6">
-          <h1 className="text-2xl font-bold text-green-800 mb-4">
-            🌾 Agriguru - Your Smart Farming Assistant
-          </h1>
-          <div className="text-gray-600 mb-4">
-            Status: {connected ? "🟢 Connected" : "🔴 Disconnected"}
-          </div>
-          <div className="text-sm text-gray-500">
-            Say "Hey Agriguru" to start conversation. Available functions:
-            <ul className="mt-2 space-y-1">
-              <li>• Create and update farmer profile</li>
-              <li>• Get personalized farming advice</li>
-              <li>• Set farming reminders</li>
-              <li>• Check weather forecast</li>
-              <li>• Get crop advice and disease diagnosis</li>
-              <li>• Check market prices</li>
-              <li>• Connect with agricultural experts</li>
-              <li>• Community queries and alerts</li>
-              <li>• Water need and harvest predictions</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      <PhoneCallingUI />
     </div>
   );
 };
